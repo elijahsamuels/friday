@@ -1,0 +1,30 @@
+Anyone with the link can create a User
+
+User can create meetings with a client
+User can create clients
+
+Client can create meetings with a User
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Get a user IP and other location info
+https://www.astroip.co/
+
+<script>
+
+$.getJSON('https://api.astroip.co/116.12.250.1/?api_key=<1725e47c-1486-4369-aaff-463cc9764026>', function(data) {
+  console.log(JSON.stringify(data, null, 2));
+});
+
+</script>    
