@@ -2,13 +2,13 @@
 <h3>Let's update your info, <%= @user.first_name %>!</h3>
 
 <form method="post" action="/users/<%=@user.id%>">
+<input id="hidden" type="hidden" name="_method" value="patch">
 
   <ul>First Name: <input type="text" name="user[first_name]" value="<%= @user.first_name %>"></ul>
   <ul>Last Name: <input type="text" name="user[last_name]" value="<%= @user.last_name %>"></ul>
   <ul>Email: <input type="text" name="user[email]" value="<%= @user.email %>"></ul>
   <ul>Phone: <input type="text" name="user[phone]" value="<%= @user.phone %>"></ul>
 
-  <input id="hidden" type="hidden" name="_method" value="patch">
   <input type="submit" value="save">
 
 </form>

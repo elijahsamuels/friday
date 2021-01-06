@@ -76,8 +76,20 @@ class UsersController < ApplicationController
   # PATCH: /users/5
   patch "/users/:id" do
     @user = User.find_by_id(params[:id])
-    @user.update(:last_name => params[:user][:last_name])
+    @user.update(
+      last_name: params[:user][:last_name],
+      first_name: params[:user][:first_name],
+      email: params[:user][:email],
+      phone: params[:user][:phone])
 
+    # @user.update(:last_name => params[:user][:last_name])
+    
+    # @user.update(params[:user])
+    # if !params.empty?
+    #   @user << User.change(params[:user][:last_name])
+    # end
+ 
+    
     # @user = self.current_user
     # @user.update_attributes(params[:user])
     # @user.first_name = params[:first_name]
@@ -87,7 +99,7 @@ class UsersController < ApplicationController
     
     @user.save
     # binding.pry
-    redirect "/users/#{@user.id}/edit"
+    redirect "/users/#{@user.id}"
   end
 
   # DELETE: /users/5/delete
