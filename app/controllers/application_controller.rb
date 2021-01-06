@@ -10,7 +10,29 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    # @user = User.find(session[:id])
+    erb :'/index'
   end
 
-end
+# minimize routes in application controller
+
+  helpers do
+
+    def logged_in?
+      !!@user
+      binding.pry
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    end
+  end
+
+    # def sanitize # make this helper method
+    # end
+
+
+
+  end
+
+

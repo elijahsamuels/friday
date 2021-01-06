@@ -1,0 +1,28 @@
+<label><h4>List all meetings</h4></label>
+<br> 
+
+<%# A table listing all the meetings %>
+<%# table head %>
+<table>
+    <thead>
+      <tr>
+          <th>Client Name</th>
+          <th>User Name</th>
+          <th>Event Date ID</th>
+      </tr>
+    </thead>
+
+<%# table body %>
+<%# might be nice to make each of these a link to the individual meeting %>
+<tbody>
+  <% Meeting.all.each.with_index(1) do |meeting, i| %>
+    <tr>    
+      <td><%= i %>. <%= meeting.client_name%></td>
+      <td><%= meeting.user_name %></td>
+      <td><%= meeting.event_date_id %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
+

@@ -11,21 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210102050917) do
+ActiveRecord::Schema.define(version: 20210106055256) do
 
   create_table "clients", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "password_digest"
+    t.string   "username"
+    t.string   "email"
+    t.integer  "phone"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.date     "event_date"
+    t.integer  "event_link_id"
+    t.datetime "meeting_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "events", force: :cascade do |t|
+    t.date     "event_date"
+    t.string   "event_link"
+    t.integer  "client_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "meetings", force: :cascade do |t|
+    t.integer  "event_date_id"
+    t.integer  "event_link_id"
+    t.integer  "client_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "client_name"
+    t.string   "user_name"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "phone"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

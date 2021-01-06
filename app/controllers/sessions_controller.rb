@@ -35,8 +35,9 @@ class SessionsController < ApplicationController
   end
 
   get "/logout" do
-    session.clear
+    session.clear # a flash here to let the user know they have been logged out. a confirmation thing.
     redirect "/"
+
   end
 
 

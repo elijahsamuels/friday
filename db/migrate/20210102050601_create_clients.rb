@@ -9,6 +9,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :last_name
       t.date :event_date
       t.integer :event_link_id
+      t.datetime :meeting_date
 
       t.timestamps null: false
     end

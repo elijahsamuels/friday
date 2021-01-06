@@ -1,0 +1,12 @@
+<h1>This is the show page for an individual instance of your model.</h1>
+
+<p>Meeting Id: <%= @meeting.id %></p>
+<p>User: <%= @meeting.user_name %></p>
+<p>Client: <%= @meeting.client_name %></p>
+
+<form method="post" action="/meetings/<%=@meeting.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Meeting">
+</form>
+
+<a href="/meetings/<%=@meeting.id%>/edit">Edit Meeting </a>

@@ -13,7 +13,8 @@ gem 'tux'
 gem 'dotenv'
 gem 'uri'
 gem 'net-http'
-
+gem 'faker'
+gem 'sinatra-flash'
 
 group :test do
   gem 'pry'

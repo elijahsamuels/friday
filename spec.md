@@ -12,6 +12,7 @@ Specs:
 - [ ] Include user input validations
 - [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [ ] Your app does NOT break if I go to unexpected URLs. It should redirect or show a 404 or 401 page!! *****
 
 Confirm
 - [ ] You have a large number of small Git commits
