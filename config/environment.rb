@@ -2,7 +2,7 @@ require 'dotenv/load'
 Dotenv.load
 # require('dotenv').config() # this breaks it. why?
 require 'pry'
-require 'faker'
+# require 'faker'
 
 ENV['SINATRA_ENV'] ||= "development"
 

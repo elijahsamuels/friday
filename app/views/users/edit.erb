@@ -1,12 +1,14 @@
 <h2></h2>
 <h3>Let's update your info, <%= @user.first_name %>!</h3>
 
-<ul>First Name: <input type="text" value="<%= @user.first_name %>"></ul>
-<ul>Last Name: <input type="text" value="<%= @user.last_name %>"></ul>
-<ul>Email: <input type="text" value="<%= @user.email %>"></ul>
-<ul>Phone: <input type="text" value="<%= @user.phone %>"></ul>
-
 <form method="post" action="/users/<%=@user.id%>">
-  <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="submit" value="submit">
+
+  <ul>First Name: <input type="text" name="user[first_name]" value="<%= @user.first_name %>"></ul>
+  <ul>Last Name: <input type="text" name="user[last_name]" value="<%= @user.last_name %>"></ul>
+  <ul>Email: <input type="text" name="user[email]" value="<%= @user.email %>"></ul>
+  <ul>Phone: <input type="text" name="user[phone]" value="<%= @user.phone %>"></ul>
+
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="submit" value="save">
+
 </form>

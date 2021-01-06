@@ -68,15 +68,26 @@ class UsersController < ApplicationController
   
   # GET: /users/5/edit
   get "/users/:id/edit" do
-    # binding.pry
     @user = User.find_by_id(params[:id])
-
+    
     erb :"/users/edit"
   end
-
+  
   # PATCH: /users/5
   patch "/users/:id" do
-    redirect "/users/:id"
+    @user = User.find_by_id(params[:id])
+    @user.update(:last_name => params[:user][:last_name])
+
+    # @user = self.current_user
+    # @user.update_attributes(params[:user])
+    # @user.first_name = params[:first_name]
+    # @user.email = params[:email]
+    # @user.update(change_params(params))
+    # @user.last_name = params[:user][:last_name]
+    
+    @user.save
+    # binding.pry
+    redirect "/users/#{@user.id}/edit"
   end
 
   # DELETE: /users/5/delete
