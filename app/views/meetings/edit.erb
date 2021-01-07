@@ -1,9 +1,13 @@
 <h1>Insert the form to edit a meeting here.</h1>
 
-<h2> Edit Meeting </h2>
+<h3>Let's update your meeting, <%= @user.first_name %>!</h3>
 
-<form method="post" action="/meeting/<%=@meeting.id%>">
+<form method="post" action="/meetings/<%=@meeting.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="content" value="<%= @meeting.datetime %>">
-  <input type="submit" value="submit">
+
+  <ul>Meeting Id: <%= @meeting.id %></ul>
+  <ul>User: <input type="text" name="meeting[user_name]" value="<%= @meeting.user_name %>"></ul>
+  <ul>Client: <input type="text" name="meeting[client_name]" value="<%= @meeting.client_name %>"></ul>
+
+  <input type="submit" value="Update Meeting">
 </form>

@@ -3,8 +3,8 @@ class MeetingsController < ApplicationController
   # READ
   # GET: /meetings
   get '/meetings' do
-    @meeting = Meeting.all
-    # session[:user_id] = @user.id
+    @user = User.find_by_id(session[:user_id])
+    @meetings = @user.meetings
     erb :'/meetings/index'
   end
   
@@ -18,8 +18,9 @@ class MeetingsController < ApplicationController
   #CREATE
   # POST: /meetings
   post '/meetings' do
-    # meeting = Meeting.new(:meetings_user_name => params[:meetings][:user_name], :meetings_client_name => params[:meetings][:client_name])
     @meeting = Meeting.new(params)
+    @user = User.find_by_id(session[:user_id])
+    @user.meetings << @meeting
     if @meeting.save
       "Your meeting has been saved"
     # take user to the user summeary page
@@ -30,6 +31,15 @@ class MeetingsController < ApplicationController
     redirect "/meetings/#{@meeting.id}"
   end
 
+  get '/show' do
+    erb :"/show"
+  end
+
+  post '/show' do
+    @meeting
+    erb :"/show"
+  end
+  
   # GET: /meetings/5
   get '/meetings/:id' do
     @meeting = Meeting.find_by_id(params[:id])
@@ -38,12 +48,20 @@ class MeetingsController < ApplicationController
 
   # GET: /meetings/5/edit
   get "/meetings/:id/edit" do
-    erb :"/meetings/edit.html"
+    @user = User.find_by_id(params[:id])
+    @meeting = Meeting.find_by_id(params[:id])
+    # binding.pry
+    erb :"/meetings/edit"
   end
 
   # PATCH: /meetings/5
   patch "/meetings/:id" do
-    redirect "/meetings/:id"
+    @meeting = Meeting.find_by_id(params[:id])
+    @meeting.update(
+      user_name: params[:meeting][:user_name],
+      client_name: params[:meeting][:client_name])
+    @meeting.save
+    redirect "/meetings/#{@meeting.id}"
   end
 
   # DELETE: /meetings/5/delete

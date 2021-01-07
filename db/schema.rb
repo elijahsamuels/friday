@@ -27,15 +27,6 @@ ActiveRecord::Schema.define(version: 20210106055256) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "events", force: :cascade do |t|
-    t.date     "event_date"
-    t.string   "event_link"
-    t.integer  "client_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "meetings", force: :cascade do |t|
     t.integer  "event_date_id"
     t.integer  "event_link_id"

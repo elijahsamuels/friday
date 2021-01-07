@@ -15,7 +15,7 @@
 <%# table body %>
 <%# might be nice to make each of these a link to the individual meeting %>
 <tbody>
-  <% Meeting.all.each.with_index(1) do |meeting, i| %>
+  <% @meetings.each.with_index(1) do |meeting, i| %>
     <tr>    
       <td><%= i %>. <%= meeting.client_name%></td>
       <td><%= meeting.user_name %></td>
