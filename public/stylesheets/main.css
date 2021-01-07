@@ -81,7 +81,18 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+
+  .flash {
+    background-color: red;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    height: 30px;
+    padding-top: 8px;
+  }
+
 }
+
 
 @media screen and (max-width: 600px) {
   .wrapper {

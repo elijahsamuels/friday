@@ -13,39 +13,59 @@ class UsersController < ApplicationController
   end
   
   post "/login" do
-
     @user = User.find_by(:email => params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
+      flash[:success] = "Sign in successful!"
       redirect "/users/#{@user.id}"
     else
-      "render this as the same page, but display a login error"
+      # "login error. please try"
+      # flash[:error] = "login error. please try again."
+      erb :"index"#, danger:"login error. please try again."
     end
   end
   
-  # CREATE: /new # this makes the new user
+  # CREATE: /new # this makes the new user. This breaks convention, but it's the same idea.
   get "/signup" do
     erb :'/signup'    
 	end
   
   # POST: /users
-  post "/signup" do
-    
+  post "/signup" do    
+    if User.find_by(email: params[:user][:email]) != nil
+      # flash[:error] = "This email is already in use. Please try again."
+      redirect :"/signup"
+    end
+
     @user = User.new(
       :first_name => params[:user][:first_name],
       :last_name => params[:user][:last_name],
       :password => params[:user][:password],
       :email => params[:user][:email])
-		if @user.save
+      
+      #THIS WORKS
+      # if user matches on the DB
+    if @user.save
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-      @password = params[:user][:password]
-      @error = @user.errors.full_messages
-
       "render this as the same page, but display a signup error"
+
       # redirect :"/signup"
     end
+
+      # if @user[:user][:first_name].empty? || @user[:user][:last_name].empty? || @user[:user][:email].empty? || @user[:user][:password].empty?
+      #   flash[:success] = "All fields must be complete!"
+      #   erb :'/signup'    
+      # elsif User.find_by(username: user.username)
+      #   flash[:success] = "This user already exists. Please create new user info.!"
+      # else
+      #   erb :'/signup'    
+      #   @user.save
+      #   session[:user_id] = @user.id
+      #   redirect "/users/#{@user.id}"
+      # end
+
   end
   
   get '/show' do

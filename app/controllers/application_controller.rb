@@ -1,12 +1,16 @@
 require './config/environment'
+require 'sinatra/flash'
 
 class ApplicationController < Sinatra::Base
 
+  # add_flash_types :success, :info, :warning, :danger #these are coming from bootstrap
+  
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "password_security"
+    register Sinatra::Flash
   end
 
   get "/" do
@@ -14,13 +18,10 @@ class ApplicationController < Sinatra::Base
     erb :'/index'
   end
 
-# minimize routes in application controller
-
   helpers do
 
     def logged_in?
       !!@user
-      # binding.pry
     end
 
     def current_user
@@ -30,9 +31,6 @@ class ApplicationController < Sinatra::Base
 
     # def sanitize # make this helper method
     # end
-
-
-
-  end
+end
 
 
