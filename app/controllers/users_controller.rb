@@ -24,11 +24,9 @@ class UsersController < ApplicationController
   end
   
   get "/signup" do
-    if !logged_in?
-      erb :'users/new', locals: {message: "Please sign up before you sign in"}
-    else
-      redirect to '/show'
-    end
+    erb :'/signup'
+
+    
 	end
   
   # POST: /users
@@ -60,9 +58,6 @@ class UsersController < ApplicationController
   # GET: /users/5
   get "/users/:id" do
     @user = User.find_by_id(params[:id])
-    
-    # @user = "future use. display user name"
-    # @logout = "future use. user logout"
     erb :"/users/show"
   end
   
@@ -81,24 +76,7 @@ class UsersController < ApplicationController
       first_name: params[:user][:first_name],
       email: params[:user][:email],
       phone: params[:user][:phone])
-
-    # @user.update(:last_name => params[:user][:last_name])
-    
-    # @user.update(params[:user])
-    # if !params.empty?
-    #   @user << User.change(params[:user][:last_name])
-    # end
- 
-    
-    # @user = self.current_user
-    # @user.update_attributes(params[:user])
-    # @user.first_name = params[:first_name]
-    # @user.email = params[:email]
-    # @user.update(change_params(params))
-    # @user.last_name = params[:user][:last_name]
-    
     @user.save
-    # binding.pry
     redirect "/users/#{@user.id}"
   end
 
@@ -106,4 +84,5 @@ class UsersController < ApplicationController
   delete "/users/:id/delete" do
     redirect "/users"
   end
+
 end
