@@ -1,5 +1,5 @@
-<h1>This is the meeting you just created.</h1>
-
+<h4>This is the meeting you just created.</h4>
+<br>
 <p>Meeting Id: <%= @meeting.id %></p>
 <p>User: <%= @meeting.user_name %></p>
 <p>Client: <%= @meeting.client_name %></p>
@@ -9,7 +9,10 @@
   <input type="submit" value="Delete Meeting">
 </form>
 
+<form method="get" action="/meetings/<%=@meeting.id%>/edit">
+<td><input type="submit" value="Update Meeting"></td>
+</form>
 
-
+<!--
 <a href="/meetings/<%=@meeting.id%>/edit">Edit Meeting</a>
-
+-->

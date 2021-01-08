@@ -1,23 +1,35 @@
 class MeetingsController < ApplicationController
 
   # READ
+  # Index
   # GET: /meetings
   get '/meetings' do
     @user = User.find_by_id(session[:user_id])
-    @meetings = @user.meetings
-    erb :'/meetings/index'
-  end
-  
+    if @user
+      @meetings = @user.meetings
+      erb :'/meetings/index'
+    else
+      # redirect :"/login"
+      "Whoa, buddy! Looks like that doesn't belong to you!"
+    end
+  end  
+
   #CREATE
   # GET: /meetings/new
   get '/meetings/new' do 
-    @meeting = Meeting.all
-    erb :'/meetings/new'
+    if logged_in?
+      @meeting = Meeting.all
+      erb :'/meetings/new'
+    else
+      # redirect '/login'
+    "Whoa, buddy! Looks like that doesn't belong to you!"
+    end
   end
   
   #CREATE
   # POST: /meetings
   post '/meetings' do
+    current_user
     @meeting = Meeting.new(params)
     @user = User.find_by_id(session[:user_id])
     @user.meetings << @meeting
@@ -42,20 +54,43 @@ class MeetingsController < ApplicationController
   
   # GET: /meetings/5
   get '/meetings/:id' do
-    @meeting = Meeting.find_by_id(params[:id])
-     erb :"/meetings/show"
+
+    if logged_in?
+      @meeting = Meeting.find_by_id(params[:id])
+      @user = self.current_user
+        if @user.id == @meeting.user_id
+          erb :"/meetings/show"
+        else
+          "You're not allowed to edit this!"      
+      end
+      # erb :"/meetings/show"
+    else
+      # redirect '/login'
+      "You're not logged in!"
   end
+end
 
   # GET: /meetings/5/edit
   get "/meetings/:id/edit" do
-    @user = User.find_by_id(params[:id])
-    @meeting = Meeting.find_by_id(params[:id])
-    # binding.pry
-    erb :"/meetings/edit"
+    if logged_in?
+      @meeting = Meeting.find_by_id(params[:id])
+      @user = self.current_user
+      # binding.pry
+      if @user.id == @meeting.user_id
+        erb :"/meetings/edit"
+      else
+        "You're not allowed to edit this!"      
+    end
+    # erb :"/meetings/show"
+  else
+    # redirect '/login'
+    "You're not logged in!"
   end
+end
 
   # PATCH: /meetings/5
   patch "/meetings/:id" do
+    current_user
     @meeting = Meeting.find_by_id(params[:id])
     @meeting.update(
       user_name: params[:meeting][:user_name],
@@ -66,6 +101,8 @@ class MeetingsController < ApplicationController
 
   # DELETE: /meetings/5/delete
   delete "/meetings/:id/delete" do
+    @meeting = Meeting.find(params[:id])
+    @meeting.destroy
     redirect "/meetings"
   end
 end

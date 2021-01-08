@@ -19,9 +19,8 @@ class UsersController < ApplicationController
       flash[:success] = "Sign in successful!"
       redirect "/users/#{@user.id}"
     else
-      # "login error. please try"
-      # flash[:error] = "login error. please try again."
-      erb :"index"#, danger:"login error. please try again."
+      flash[:error] = "login error. please try again."
+      erb :"/index"#, danger:"login error. please try again."
     end
   end
   
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
   # POST: /users
   post "/signup" do    
     if User.find_by(email: params[:user][:email]) != nil
-      # flash[:error] = "This email is already in use. Please try again."
+      flash[:error] = "This email is already in use. Please try again."
       redirect :"/signup"
     end
 
@@ -43,15 +42,12 @@ class UsersController < ApplicationController
       :password => params[:user][:password],
       :email => params[:user][:email])
       
-      #THIS WORKS
-      # if user matches on the DB
     if @user.save
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-      "render this as the same page, but display a signup error"
-
-      # redirect :"/signup"
+      flash[:error] = "Signup error. Please try again."
+      redirect :"/signup"
     end
 
       # if @user[:user][:first_name].empty? || @user[:user][:last_name].empty? || @user[:user][:email].empty? || @user[:user][:password].empty?

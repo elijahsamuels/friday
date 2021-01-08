@@ -21,7 +21,8 @@ class ApplicationController < Sinatra::Base
   helpers do
 
     def logged_in?
-      !!@user
+      !!User.find_by(id: session[:user_id])
+      # binding.pry
     end
 
     def current_user
@@ -32,5 +33,3 @@ class ApplicationController < Sinatra::Base
     # def sanitize # make this helper method
     # end
 end
-
-

@@ -1,6 +1,6 @@
-<h1>Insert the form to edit a meeting here.</h1>
+<%# /meetings/:id/edit %>
 
-<h3>Let's update your meeting, <%= @user.first_name %>!</h3>
+<h4>Let's update your meeting, <%= @user.first_name %>!</h4>
 
 <form method="post" action="/meetings/<%=@meeting.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">

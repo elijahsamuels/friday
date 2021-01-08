@@ -13,33 +13,123 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    background: url('/images/watch-background.jpg') no-repeat;
+    background-size: cover;
     color: #333;
-    font-family: Sans-Serif;
-    line-height: 18px;
+    font-family: Helvetica, Sans-Serif;
   }
+
+header,
+footer {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.75rem;
+  background-color: gray;
+}
+
+.top-header h1 {
+  text-align: left;
+  padding-top: 20px;
+  padding-left: 30px;
+}
+
+  .flash {
+    background-color: red;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    height: 30px;
+    padding-top: 8px;
+  }
+
 
   .wrapper {
     background: #fff;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
-    margin: 16px auto;
+    margin: 20px auto;
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
   }
 
+  .navbar {
+    background-color: gray;
+    list-style-type: none;
+    text-align: center; 
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar li {
+    display: inline-block;
+    font-size: 20px;
+    padding: 5px 40px;
+  }
+  .navbar a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .navbar a:hover {
+    color: #fff;
+  }
+
+  table, th, td {
+    text-align: left;
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th, td {
+    border-bottom: 2px gray;
+  }
+
+  tr:nth-child(even) {background-color: #f2f2f2;}
+
+  th {
+    background-color: lightblue;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .listappts ul li h3 {
+    text-decoration: underline;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    padding: 0px 40px;
+  }
+
   h1 {
     font-size: 36px;
     line-height: 54px;
+    color: white;
   }
 
   h2 {
-    border-bottom: 2px solid #ccc;
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 16px;
+    background-color: lightblue;
+    padding-left: 10px;
   }
 
   h3 {
@@ -52,7 +142,11 @@
   }
 
   .main {
-    overflow: hidden;
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
   }
 
   .content {
@@ -72,27 +166,17 @@
     font-size: 14px;
   }
 
-  .branding {
-    clear: both;
-  }
-
   footer.branding {
-    border-top: 2px solid #ccc;
-    margin-top: 20px;
-    padding-top: 20px;
+    padding-top: 15px;
+    background-color: gray;
+    text-align: center;
   }
 
-  .flash {
-    background-color: red;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    height: 30px;
-    padding-top: 8px;
+  div #github {
+    display: inline-block;
+    padding-top: 10px;
   }
-
 }
-
 
 @media screen and (max-width: 600px) {
   .wrapper {

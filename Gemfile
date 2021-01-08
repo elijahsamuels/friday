@@ -14,7 +14,7 @@ gem 'dotenv'
 gem 'uri'
 gem 'net-http'
 gem 'faker'
-gem 'sinatra-flash'
+gem 'sinatra-flash', '~> 0.3.0'
 
 group :test do
   gem 'pry'

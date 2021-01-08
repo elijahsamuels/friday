@@ -1,3 +1,5 @@
+<%# /meetings %>
+
 <label><h4>List all meetings</h4></label>
 <br> 
 
@@ -6,22 +8,39 @@
 <table>
     <thead>
       <tr>
+          <th> </th>
           <th>Client Name</th>
           <th>User Name</th>
           <th>Event Date ID</th>
+          <th> </th>
+          <th> </th>
       </tr>
     </thead>
 
-<%# table body %>
+<%# table body iterating through all the meetings %>
 <%# might be nice to make each of these a link to the individual meeting %>
+
 <tbody>
   <% @meetings.each.with_index(1) do |meeting, i| %>
     <tr>    
-      <td><%= i %>. <%= meeting.client_name%></td>
+      <td><%= i %>. </td>
+      <td><%= meeting.client_name%></td>
       <td><%= meeting.user_name %></td>
       <td><%= meeting.event_date_id %></td>
-    </tr>
+    
+      <%# UPDATE button %>
+      <form method="get" action="/meetings/<%= meeting.id %>/edit">
+      <td><input type="submit" value="Update Meeting"></td>
+      </form>
+
+      <%# DELETE button %>
+      <form method="post" action="/meetings/<%= meeting.id %>/delete">
+        <input id="hidden" type="hidden" name="_method" value="DELETE">
+        <td><input type="submit" value="Delete Meeting"></td>
+      </form>
     <% end %>
+
+    </tr>
 
   </tbody>
 </table>
