@@ -18,17 +18,41 @@ class ApplicationController < Sinatra::Base
     erb :'/index'
   end
 
+  not_found do
+    status 404
+    erb :error
+  end
+  
   helpers do
 
     def logged_in?
       !!User.find_by(id: session[:user_id])
-      # binding.pry
     end
 
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+      end
     end
-  end
+
+    def login_error
+      flash[:error] = "Login error. Please try again."
+    end
+
+    def signup_error
+      flash[:error] = "This email is already in use. Please try again."
+    end
+
+    def login_successful
+      flash[:success] = "Sign in successful!"
+    end
+
+    def meeting_saved
+      flash[:success] = "Your meeting has been saved!"
+    end
+
+    def not_user_object
+      flash[:error] = "Alright Wreck-It Ralph, you know that ain't your business..."
+    end
 
     # def sanitize # make this helper method
     # end

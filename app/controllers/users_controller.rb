@@ -16,10 +16,10 @@ class UsersController < ApplicationController
     @user = User.find_by(:email => params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-      flash[:success] = "Sign in successful!"
+      login_successful
       redirect "/users/#{@user.id}"
     else
-      flash[:error] = "login error. please try again."
+      login_error
       erb :"/index"#, danger:"login error. please try again."
     end
   end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   # POST: /users
   post "/signup" do    
     if User.find_by(email: params[:user][:email]) != nil
-      flash[:error] = "This email is already in use. Please try again."
+      signup_error
       redirect :"/signup"
     end
 
@@ -46,22 +46,9 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-      flash[:error] = "Signup error. Please try again."
+      signup_error
       redirect :"/signup"
     end
-
-      # if @user[:user][:first_name].empty? || @user[:user][:last_name].empty? || @user[:user][:email].empty? || @user[:user][:password].empty?
-      #   flash[:success] = "All fields must be complete!"
-      #   erb :'/signup'    
-      # elsif User.find_by(username: user.username)
-      #   flash[:success] = "This user already exists. Please create new user info.!"
-      # else
-      #   erb :'/signup'    
-      #   @user.save
-      #   session[:user_id] = @user.id
-      #   redirect "/users/#{@user.id}"
-      # end
-
   end
   
   get '/show' do
@@ -72,7 +59,6 @@ class UsersController < ApplicationController
     @user
     erb :"/show"
   end
-
 
   # GET: /users/5
   get "/users/:id" do
