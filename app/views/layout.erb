@@ -12,19 +12,23 @@
   <body>
     <div class="wrapper">
 
-    <a href="/">Main</a> &bull;
-    <a href="/clients/new">New Client</a> &bull;
-    <a href="/meetings">All Meetings</a> &bull;
-    <a href="/meetings/new">New Meeting</a> &bull;
-    <%# <a href="/users/new">New User</a> &bull; %>
-    <a href="/logout"> Log Out </a>
+    <a href="/">Main</a> 
 
-    <p>Date/Time: <span id="datetime"></span></p>
-    <script>
-    var dt = new Date();
-    document.getElementById("datetime").innerHTML=dt.toLocaleString();
-    </script>    
-    </p>
+    <% if logged_in? %>
+
+      <%# <a href="/clients/new">New Client</a> &bull; %>
+      <%# <a href="/users/new">New User</a> &bull; %>
+      &bull; <a href="/meetings">All Meetings</a>
+      &bull; <a href="/meetings/new">New Meeting</a>
+      &bull; <a href="/logout"> Log Out </a>
+
+      <p>Date/Time: <span id="datetime"></span></p>
+      <script>
+      var dt = new Date();
+      document.getElementById("datetime").innerHTML=dt.toLocaleString();
+      </script>    
+      </p>
+    <% end %>
 
     <% flash.keys.each do |type| %>
       <div data-alert class="flash <%= type %> alert-box radius">
