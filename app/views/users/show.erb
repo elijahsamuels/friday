@@ -1,14 +1,11 @@
 <h2></h2>
 <h3>Hello, <%= @user.first_name %>!</h3>
 
-<a href="/users/<%= @user.id %>/edit">Click here to update your info.</a>
-
 <ul>First Name: <%= @user.first_name %></ul>
 <ul>Last Name: <%= @user.last_name %></ul>
 <ul>Email: <%= @user.email %></ul>
 <ul>Phone: <%= @user.phone %></ul>
 
-<br>
-<ul>Create a new meeting</ul>
-<ul>make a list of meetings that belong to a user</ul>
-<ul>make a list of clients that belong to a user</ul>
+<ul><form method="get" action="/users/<%= @user.id %>/edit">
+    <button type="submit" value="Update User Info" class="btn btn-dark btn-sm">Update User Info</button>
+</form>

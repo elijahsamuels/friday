@@ -15,6 +15,7 @@ gem 'uri'
 gem 'net-http'
 gem 'faker'
 gem 'sinatra-flash', '~> 0.3.0'
+gem 'bootstrap'
 
 group :test do
   gem 'pry'

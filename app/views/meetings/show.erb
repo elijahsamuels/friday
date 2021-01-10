@@ -6,12 +6,17 @@
 
 <form method="post" action="/meetings/<%=@meeting.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Meeting">
+  <%# <input type="submit" value="Delete Meeting"> %>
+<ul><button type="submit" value="Delete Meeting" class="btn btn-dark btn-sm">Delete Meeting</button>
 </form>
 
 <form method="get" action="/meetings/<%=@meeting.id%>/edit">
-<td><input type="submit" value="Update Meeting"></td>
+<%# <ul><input type="submit" value="Update Meeting"></> %>
+<button type="submit" value="Update Meeting" class="btn btn-dark btn-sm">Update Meeting</button>
 </form>
+
+
+
 
 <!--
 <a href="/meetings/<%=@meeting.id%>/edit">Edit Meeting</a>

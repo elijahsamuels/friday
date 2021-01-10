@@ -1,23 +1,25 @@
 <%# / %>
 <div class="container">
   <header></header>
-    <h2>Home</h2>
+    <h2>Welcome!</h2>
 
 
   <div class="login">
     <form action='/login' method="POST">
-      <p id="login"><h3>Log In:</h3>
+      <p id="login"><h4>Log In:</h4>
         <input id="email" type="text" name="user[email]" placeholder="Email">
-        <br>
+        <%# <br> %>
         <input id="password" type="password" name="user[password]" placeholder="Password">
-        <br>
-        <input type="submit" value="Log In">
+        <%# <br> %>
+      <button type="submit" class="btn btn-dark btn-sm" value="Log In">Log in</button>
     </form>
   </div>
 
+  <br>
 <form action='/signup' method='get'>
-    <button type="submit">Sign Up</button>
+    <button type="submit" class="btn btn-dark btn-sm">Sign Up</button>
 </form>
+
 
 </div>
 

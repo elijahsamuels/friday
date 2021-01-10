@@ -63,7 +63,10 @@ class UsersController < ApplicationController
   # GET: /users/5
   get "/users/:id" do
     @user = User.find_by_id(params[:id])
-    erb :"/users/show"
+      unless current_user
+        erb :'/error'
+      end
+      erb :"/users/show"
   end
   
   # GET: /users/5/edit

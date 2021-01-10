@@ -30,14 +30,14 @@
     
       <%# UPDATE button %>
       <form method="get" action="/meetings/<%= meeting.id %>/edit">
-      <td><input type="submit" value="Update Meeting"></td>
+        <td><button type="submit" value="Update Meeting" class="btn btn-dark btn-sm" role="button" data-bs-toggle="button">Update Meeting</button></td>
       </form>
 
       <%# DELETE button %>
       <form method="post" action="/meetings/<%= meeting.id %>/delete">
-        <input id="hidden" type="hidden" name="_method" value="DELETE">
-        <td><input type="submit" value="Delete Meeting"></td>
+        <td><button id="hidden" name="_method" value="DELETE" type="submit" class="btn btn-dark btn-sm">Delete Meeting</button></td>
       </form>
+
     <% end %>
 
     </tr>
