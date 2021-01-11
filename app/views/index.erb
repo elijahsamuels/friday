@@ -7,10 +7,8 @@
   <div class="login">
     <form action='/login' method="POST">
       <p id="login"><h4>Log In:</h4>
-        <input id="email" type="text" name="user[email]" placeholder="Email">
-        <%# <br> %>
-        <input id="password" type="password" name="user[password]" placeholder="Password">
-        <%# <br> %>
+        <input id="email" type="text" name="user[email]" placeholder="Email" required>
+        <input id="password" type="password" name="user[password]" placeholder="Password" required>
       <button type="submit" class="btn btn-dark btn-sm" value="Log In">Log in</button>
     </form>
   </div>

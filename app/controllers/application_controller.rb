@@ -35,11 +35,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def login_error
-      flash[:error] = "Login error. Please try again."
+      flash[:danger] = "Login error. Please try again."
     end
 
     def signup_error
-      flash[:error] = "This email is already in use. Please try again."
+      flash[:danger] = "This email is already in use. Please try again."
     end
 
     def login_successful
@@ -51,7 +51,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def not_user_object
-      flash[:error] = "Alright Wreck-It Ralph, you know that ain't your business..."
+      flash[:danger] = "Alright Wreck-It Ralph, you know that ain't your business..."
     end
 
     # def sanitize # make this helper method

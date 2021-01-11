@@ -60,15 +60,21 @@ class UsersController < ApplicationController
     erb :"/show"
   end
 
+  # READ
   # GET: /users/5
   get "/users/:id" do
     @user = User.find_by_id(params[:id])
-      unless current_user
-        erb :'/error'
-      end
+    if logged_in? && @user == self.current_user
       erb :"/users/show"
+    else 
+      erb :'/error'
+    end
   end
-  
+
+
+
+
+
   # GET: /users/5/edit
   get "/users/:id/edit" do
     @user = User.find_by_id(params[:id])

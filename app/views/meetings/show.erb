@@ -1,5 +1,3 @@
-<h2>This is the meeting you just created.</h2>
-<br>
 <p>Meeting Id: <%= @meeting.id %></p>
 <p>User: <%= @meeting.user_name %></p>
 <p>Client: <%= @meeting.client_name %></p>
@@ -11,7 +9,7 @@
 </form>
 
 <form method="get" action="/meetings/<%=@meeting.id%>/edit">
-<%# <ul><input type="submit" value="Update Meeting"></> %>
+  <%# <ul><input type="submit" value="Update Meeting"></> %>
 <button type="submit" value="Update Meeting" class="btn btn-dark btn-sm">Update Meeting</button>
 </form>
 

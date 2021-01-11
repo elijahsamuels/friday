@@ -33,13 +33,13 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(params)
     @user = User.find_by_id(session[:user_id])
     @user.meetings << @meeting
-    if @meeting.save
-      meeting_saved
-      # take user to the user summeary page
-      # redirect "/users/#{@user.id}" 
-    else
-      erb :'/meetings/new' #let the user try again
-    end
+      if @meeting.save
+        meeting_saved
+        # take user to the user summeary page
+        # redirect "/users/#{@user.id}" 
+      else
+        erb :'/meetings/new' #let the user try again
+      end
     redirect "/meetings/#{@meeting.id}"
   end
   
@@ -58,37 +58,54 @@ class MeetingsController < ApplicationController
     if logged_in?
       @meeting = Meeting.find_by_id(params[:id])
       @user = self.current_user
-        if @user.id == @meeting.user_id
-          erb :"/meetings/show"
-        else
-          not_user_object
-          redirect :"/meetings"
-        end
-        # erb :"/meetings/show"
+
+      unless current_user 
+        erb :"/meetings/show"
+      end
+
+      if !@meeting && !current_user
+        erb :"/users/#{@user.id}"
+      elsif  @meeting && @meeting.user == current_user
+          erb :'/meetings/show'
       else
-        # redirect '/login'
-        "You're not logged in!"
+        not_user_object
+        redirect :'/meetings'
       end
     end
-  
-  
+  end
+
+    # ############
+
+    #     if @user.id == @meeting.user_id
+    #       erb :"/meetings/show"
+    #     else
+    #       not_user_object
+    #       redirect :"/meetings"
+    #     end
+    #     # erb :"/meetings/show"
+    #   else
+    #     # redirect '/login'
+    #     "You're not logged in!"
+    #   end
+    # end
+
   # GET: /meetings/5/edit
   get "/meetings/:id/edit" do
     if logged_in?
       @meeting = Meeting.find_by_id(params[:id])
       @user = self.current_user
-      # binding.pry
-      if @user.id == @meeting.user_id
-        erb :"/meetings/edit"
+        if @user.id == @meeting.user_id
+          meeting_saved
+          erb :"/meetings/edit"
+        else
+          not_user_object
+          redirect :"/meetings"
+        end
       else
-        "You're not allowed to edit this!"      
+        not_user_object
+        redirect :"/meetings"
       end
-      # erb :"/meetings/show"
-    else
-      # redirect '/login'
-      "You're not logged in!"
     end
-  end
   
   # PATCH: /meetings/5
   patch "/meetings/:id" do
