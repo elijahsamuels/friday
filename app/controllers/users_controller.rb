@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  
+  # before do
+  #   require_login
+  # end
 
   # GET: /users
   get "/users" do

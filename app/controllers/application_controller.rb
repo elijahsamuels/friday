@@ -9,7 +9,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "password_security"
+    set :session_secret, "random_secret"
     register Sinatra::Flash
   end
 
@@ -23,13 +23,28 @@ class ApplicationController < Sinatra::Base
     erb :error
   end
   
+  not_found do
+    status 302
+    erb :error
+  end
+  
   helpers do
 
+    def require_login
+      unless logged_in?
+        # login_error
+        redirect :'/login'
+      end
+    end
+
     def logged_in?
+      # !!session[:user_id]
+      # !!current_user
       !!User.find_by(id: session[:user_id])
     end
 
     def current_user
+      # User.find(session[:user_id])
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
       end
     end
@@ -53,7 +68,7 @@ class ApplicationController < Sinatra::Base
     def not_user_object
       flash[:danger] = "Alright Wreck-It Ralph, you know that ain't your business..."
     end
+  end
 
     # def sanitize # make this helper method
     # end
-end

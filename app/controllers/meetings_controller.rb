@@ -1,5 +1,10 @@
 class MeetingsController < ApplicationController
 
+  # before do
+  #   require_login
+  #   binding.pry
+  # end
+
   # READ
   # Index
   # GET: /meetings
@@ -72,6 +77,8 @@ class MeetingsController < ApplicationController
         redirect :'/meetings'
       end
     end
+    not_user_object
+    redirect :"/login"
   end
 
     # ############
@@ -90,22 +97,61 @@ class MeetingsController < ApplicationController
     # end
 
   # GET: /meetings/5/edit
+
+  get '/blogs/:id/edit' do 
+    @blog = Blog.find_by(id: params[:id])
+    if !@blog && !current_user
+        erb :'error'
+    elsif  @blog && @blog.user == current_user
+        erb :'/blogs/edit'
+    else
+        redirect '/blogs/index'
+    end
+end
+
   get "/meetings/:id/edit" do
     if logged_in?
       @meeting = Meeting.find_by_id(params[:id])
       @user = self.current_user
-        if @user.id == @meeting.user_id
-          meeting_saved
-          erb :"/meetings/edit"
-        else
-          not_user_object
-          redirect :"/meetings"
-        end
+      unless current_user 
+        erb :'/meetings/edit'
+      end
+
+      if !@meeting && !current_user
+        erb :'error'
+      elsif  @meeting && @meeting.user == current_user
+        erb :'/meetings/edit'
       else
-        not_user_object
-        redirect :"/meetings"
+        redirect '/meetings/index'
       end
     end
+    not_user_object
+    redirect :"/login"
+    end
+    #     if @user.id == @meeting.user_id
+    #       meeting_saved
+    #       erb :"/meetings/edit"
+    #     else
+    #       not_user_object
+    #     end
+    #   else
+    #   login_error
+    # end
+
+  # get "/meetings/:id/edit" do
+  #   if logged_in?
+  #     @meeting = Meeting.find_by_id(params[:id])
+  #     @user = self.current_user
+  #       if @user.id == @meeting.user_id
+  #         meeting_saved
+  #         erb :"/meetings/edit"
+  #       else
+  #         not_user_object
+  #       end
+  #     else
+  #     login_error
+  #   end
+  # end
   
   # PATCH: /meetings/5
   patch "/meetings/:id" do

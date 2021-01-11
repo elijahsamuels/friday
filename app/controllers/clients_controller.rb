@@ -2,12 +2,12 @@ class ClientsController < ApplicationController
 
   # GET: /clients
   get "/clients" do
-    erb :"/clients/index.html"
+    erb :"/clients/index"
   end
 
   # GET: /clients/new
   get "/clients/new" do
-    erb :"/clients/new.html"
+    erb :"/clients/new"
   end
 
   # POST: /clients
@@ -17,12 +17,12 @@ class ClientsController < ApplicationController
 
   # GET: /clients/5
   get "/clients/:id" do
-    erb :"/clients/show.html"
+    erb :"/clients/show"
   end
 
   # GET: /clients/5/edit
   get "/clients/:id/edit" do
-    erb :"/clients/edit.html"
+    erb :"/clients/edit"
   end
 
   # PATCH: /clients/5
