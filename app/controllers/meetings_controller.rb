@@ -77,8 +77,8 @@ class MeetingsController < ApplicationController
         redirect :'/meetings'
       end
     end
-    not_user_object
-    redirect :"/login"
+    # not_user_object
+    # redirect :"/login"
   end
 
     # ############
