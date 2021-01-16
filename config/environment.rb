@@ -1,9 +1,3 @@
-require 'dotenv/load'
-Dotenv.load
-# require('dotenv').config() # this breaks it. why?
-require 'pry'
-require 'sinatra/flash'
-
 ENV['SINATRA_ENV'] ||= "development"
 
 require 'bundler/setup'

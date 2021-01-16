@@ -1,6 +1,8 @@
 <p>Meeting Id: <%= @meeting.id %></p>
 <p>User: <%= @meeting.user_name %></p>
 <p>Client: <%= @meeting.client_name %></p>
+<p>Date: <%= @meeting.meeting_date %></p> <%# this is showing YYYY-MM-DD %>
+<p>Time: <%= @meeting.meeting_time %></p> <%# this is showing YYYY-MM-DD HH:MM:SS UTC %>
 
 <form method="post" action="/meetings/<%=@meeting.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">

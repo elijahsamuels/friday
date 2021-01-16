@@ -2,8 +2,6 @@ require './config/environment'
 require 'sinatra/flash'
 
 class ApplicationController < Sinatra::Base
-
-  # add_flash_types :success, :info, :warning, :danger #these are coming from bootstrap
   
   configure do
     set :public_folder, 'public'
@@ -19,20 +17,21 @@ class ApplicationController < Sinatra::Base
   end
 
   not_found do
-    status 404
-    erb :error
+    # not_user_object
+    erb :error_handling
   end
   
-  not_found do
-    status 302
+  error do
+    # not_user_object
     erb :error
   end
+
+  
   
   helpers do
-
+  
     def require_login
       unless logged_in?
-        # login_error
         redirect :'/login'
       end
     end
@@ -42,7 +41,7 @@ class ApplicationController < Sinatra::Base
       # !!current_user
       !!User.find_by(id: session[:user_id])
     end
-
+      # a ||= b #assign b to a if a is null or undefined or false (i.e. false-ish value in ruby)
     def current_user
       # User.find(session[:user_id])
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
@@ -61,6 +60,10 @@ class ApplicationController < Sinatra::Base
       flash[:success] = "Sign in successful!"
     end
 
+    def logout_successful
+      flash[:success] = "Log out successful!"
+    end
+
     def meeting_saved
       flash[:success] = "Your meeting has been saved!"
     end
@@ -68,6 +71,20 @@ class ApplicationController < Sinatra::Base
     def not_user_object
       flash[:danger] = "Alright Wreck-It Ralph, you know that ain't your business..."
     end
+
+    def meeting_deleted
+      flash[:danger] = "That meeting is deleted!"
+    end
+
+    def testing_error
+      flash[:danger] = "THIS IS A TEST. PLEASE FIX"
+    end
+
+    def not_found
+      binding.pry # this is a test to see if it works
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    
   end
 
     # def sanitize # make this helper method

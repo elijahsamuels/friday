@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210106055256) do
+ActiveRecord::Schema.define(version: 20210113042103) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "password_digest"
@@ -32,10 +32,13 @@ ActiveRecord::Schema.define(version: 20210106055256) do
     t.integer  "event_link_id"
     t.integer  "client_id"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "client_name"
     t.string   "user_name"
+    t.datetime "meeting_datetime"
+    t.date     "meeting_date"
+    t.time     "meeting_time"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20210106055256) do
     t.string   "password_digest"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "phone"
+    t.string   "phone"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

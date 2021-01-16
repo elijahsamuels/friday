@@ -24,10 +24,16 @@
 
 <tbody>
   <% @meetings.each.with_index(1) do |meeting, i| %>
-    <tr>    
+    <tr>
       <td><%= i %>. </td>
       <td><%= meeting.client_name%></td>
       <td><%= meeting.user_name %></td>
+      <td><%= meeting.meeting_date %></td> <%# this is showing YYYY-MM-DD %>
+      <td><%= meeting.meeting_time %></td> <%# this is showing YYYY-MM-DD HH:MM:SS UTC %>
+<!--      <%# <td><%= meeting.find_by_id(:id).strftime("%B %d, %Y") %></td> %>
+
+      <td><%# binding.pry %></td>
+      
 <!--      FOR FUTURE DEV
       <td><%= meeting.event_date_id %></td>
 -->

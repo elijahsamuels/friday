@@ -3,8 +3,6 @@ class AddTestDataForMeetings < ActiveRecord::Migration
       change_table :meetings do |t|
         t.string :client_name
         t.string :user_name
-  
     end
-  
   end
 end

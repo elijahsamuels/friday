@@ -36,11 +36,6 @@
     <% end %>
     
     <% if logged_in? %>
-      <%# <a href="/clients/new">New Client</a> &bull; %>
-      <%# <a href="/users/new">New User</a> &bull; %>
-      <%# &bull; <a href="/meetings">All Meetings</a> %>
-      <%# &bull; <a href="/meetings/new">New Meeting</a> %>
-      <%# &bull; <a href="/logout"> Log Out </a> %>
 
       <form action='/meetings' method='get'>
           <button type="submit" class="btn btn-light btn-sm">All Meetings</button>
@@ -52,18 +47,15 @@
       </form>
       <br>
 
+      <form action='/users/<%= @user.id %>/edit' method='get'>
+          <button type="submit" class="btn btn-light btn-sm">Edit Info</button>
+      </form>
+      <br>
+
       <form action='/logout' method='get'>
           <button type="submit" class="btn btn-light btn-sm">Log Out</button>
       </form>
       <br>
-
-      <%# <button class="btn btn-light btn-sm" style="position: absolute; right: 0;"> Date/Time: <span id="datetime"></span>
-        <script>
-          var dt = new Date();
-          document.getElementById("datetime").innerHTML=dt.toLocaleString();
-        </script>    
-        </p>
-      </button> %>
 
       <button class="btn btn-light btn-sm" style="position: absolute; right: 0;"><span id="todaysDate"></span>
         <script>
@@ -100,8 +92,7 @@
       </div>
     <% end %>
       
-
-        <%= yield %>
+      <%= yield %>
 
       <footer class="branding">
         <small>&copy; 2021 Contact: <a href="mailto:elijahsamuels@gmail.com"><strong>Elijah Samuels</strong></a></small>
