@@ -1,5 +1,6 @@
 require './config/environment'
 require 'sinatra/flash'
+require 'date'
 
 class ApplicationController < Sinatra::Base
   
@@ -84,6 +85,26 @@ class ApplicationController < Sinatra::Base
       binding.pry # this is a test to see if it works
       raise ActionController::RoutingError.new('Not Found')
     end
+
+    def date_current
+      DateTime.current.strftime("%Y-%m-%d")
+    end
+
+    # def human_meeting_date
+    #   @meeting = Meeting.find_by_id(params[:id])
+    #   @meeting.meeting_date
+    #   binding.pry
+
+    # end
+
+    def datepicker_input form, field
+      content_tag :td, :data => {:provide => 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-autoclose' => 'true'} do
+        form.text_field field, class: 'form-control', placeholder: 'YYYY-MM-DD'
+      end
+    end
+
+
+  
     
   end
 

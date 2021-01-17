@@ -21,7 +21,8 @@ class MeetingsController < ApplicationController
 
   #CREATE
   # GET: /meetings/new
-  get '/meetings/new' do 
+  get '/meetings/new' do
+    datetime_current
     if logged_in?
       @meeting = Meeting.all
       @user = User.find_by_id(session[:user_id])

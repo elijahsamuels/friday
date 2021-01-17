@@ -6,10 +6,14 @@
   <input id="hidden" type="hidden" name="_method" value="PATCH">
 
   <ul>Meeting Id: <%= @meeting.id %></ul>
+
   <ul>User: <input type="text" name="meeting[user_name]" value="<%= @meeting.user_name %>" required></ul>
+
   <ul>Client: <input type="text" name="meeting[client_name]" value="<%= @meeting.client_name %>" required></ul>
-  <ul>Date: <input type="text" name="meeting[meeting_date]" value="<%= @meeting.meeting_date %>" ></ul>
-  <ul>Time: <input type="text" name="meeting[meeting_time]" value="<%= @meeting.meeting_time %>" ></ul>
+
+  <ul>Date: <input type="date" name="meeting[meeting_date]" value="<%= @meeting.meeting_date.strftime("%Y-%m-%d")%>" min="<%=datetime_current%>"></ul>
+
+  <ul>Time: <input type="time" name="meeting[meeting_time]" value="<%= @meeting.meeting_time %>" ></ul>
 
   <ul><button type="submit" value="Update Meeting" class="btn btn-dark btn-sm">Update Meeting</button>
 

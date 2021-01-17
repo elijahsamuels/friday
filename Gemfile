@@ -17,6 +17,7 @@ gem 'faker'
 gem 'sinatra-flash', '~> 0.3.0'
 gem 'bootstrap'
 gem 'pry'
+# gem 'bootstrap-datepicker-rails'
 
 group :test do
   gem 'rspec'

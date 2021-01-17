@@ -4,6 +4,7 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
  :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -2072,7 +2073,8 @@ pre code {
   opacity: 1;
 }
 
-input[type="date"].form-control,
+input[type="date"].datepicker,
+/* input[type="date"].form-control, */
 input[type="time"].form-control,
 input[type="datetime-local"].form-control,
 input[type="month"].form-control {
