@@ -1,10 +1,5 @@
 class MeetingsController < ApplicationController
 
-  # before do
-  #   require_login
-  #   binding.pry
-  # end
-
   # READ
   # Index
   # GET: /meetings
@@ -22,7 +17,7 @@ class MeetingsController < ApplicationController
   #CREATE
   # GET: /meetings/new
   get '/meetings/new' do
-    datetime_current
+    booking_date
     if logged_in?
       @meeting = Meeting.all
       @user = User.find_by_id(session[:user_id])
@@ -64,14 +59,14 @@ class MeetingsController < ApplicationController
       @meeting = Meeting.find_by_id(params[:id])
       @user = self.current_user
       unless current_user 
-        # binding.pry
+        binding.pry
         erb :"/meetings/show"
       end
       
       if !@meeting && !current_user
         erb :"/users/#{@user.id}"
       elsif  @meeting && @meeting.user == current_user
-          erb :'/meetings/show'
+        erb :'/meetings/show'
       else
         not_user_object
         redirect "/meetings"
@@ -94,8 +89,9 @@ class MeetingsController < ApplicationController
       elsif  @meeting && @meeting.user == current_user
         erb :'/meetings/edit'
       else
-        redirect '/meetings/index'
+        redirect '/meetings'
       end
+      # binding.pry
     end
   end
   
@@ -105,17 +101,19 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.find_by_id(params[:id])
     @meeting.update(
       user_name: params[:meeting][:user_name],
-      client_name: params[:meeting][:client_name])
-    @meeting.save
-    meeting_saved
-    redirect "/meetings/#{@meeting.id}"
-  end
-
-  # DELETE: /meetings/5/delete
-  delete "/meetings/:id/delete" do
-    @meeting = Meeting.find(params[:id])
-    @meeting.destroy
-    redirect "/meetings"
-  end
-
+      client_name: params[:meeting][:client_name],
+      meeting_date: params[:meeting][:meeting_date],
+      meeting_time: params[:meeting][:meeting_time])
+      @meeting.save
+      meeting_saved
+      redirect "/meetings/#{@meeting.id}"
+    end
+    
+    # DELETE: /meetings/5/delete
+    delete "/meetings/:id/delete" do
+      @meeting = Meeting.find(params[:id])
+      @meeting.destroy
+      redirect "/meetings"
+    end
+    # binding.pry    
 end

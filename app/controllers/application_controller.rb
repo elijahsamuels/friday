@@ -13,27 +13,30 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    # @user = User.find(session[:id])
-    erb :'/index'
+    @meeting = Meeting.all
+    @user = User.find_by_id(session[:user_id])
+    if logged_in? 
+      not_user_object
+      redirect '/meetings'
+    else
+      erb :'/index'
+    end   
   end
 
   not_found do
-    # not_user_object
-    erb :error_handling
+    redirect '/'
   end
   
   error do
     # not_user_object
     erb :error
   end
-
-  
   
   helpers do
   
     def require_login
       unless logged_in?
-        redirect :'/login'
+        redirect '/login'
       end
     end
 
@@ -90,14 +93,8 @@ class ApplicationController < Sinatra::Base
       DateTime.current.strftime("%Y-%m-%d")
     end
 
-    # def human_meeting_date
-    #   @meeting = Meeting.find_by_id(params[:id])
-    #   @meeting.meeting_date
-    #   binding.pry
+    def booking_date
+      DateTime.current + 48.hours
+    end
 
-    # endgit   
-    
   end
-
-    # def sanitize # make this helper method
-    # end

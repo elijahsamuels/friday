@@ -1,6 +1,6 @@
 <%# /meetings/new %>
 
-<form action='/meetings' method='POST'>
+<form action='/meetings' method='post'>
 <h2>Create a new meeting.</h2>
     
 <br>
@@ -12,13 +12,13 @@
 
     <ul><label for="meeting_date">Meeting Date: </label>
     <%# <input id="meeting_date" type="text" name="meeting_date"></ul> %>
-    <input id="meeting_date" type="date" name="meeting_date" min="<%=date_current%>">
+    <input id="meeting_date" type="date" name="meeting_date" min="<%=booking_date.strftime("%Y-%m-%d")%>" max="2030-12-31" required>
 
     <ul><label for="meeting_time">Meeting Time: </label>
-    <input id="meeting_time" type="time" name="meeting_time" ></ul>
+    <input id="meeting_time" type="time" name="meeting_time" min="10:00" max="16:00" ></ul>
 
 
-
+    <%# <% binding.pry %>
 
     <ul><button type="submit" value="Create Meeting" class="btn btn-dark btn-sm">Create Meeting</button></ul>
 

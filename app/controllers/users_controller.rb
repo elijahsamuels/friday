@@ -6,13 +6,17 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
-    @user = User.find(session[:id])
-    erb :"/users/index"
+    if logged_in?
+      @user = User.find(session[:id])
+      erb :"/users/index"
+    else
+      login_error
+      redirect "/"
+    end
   end
   
   # GET: /users/new
   get "/users/new" do
-    binding.pry
     @user = User.all
     erb :"/users/new"
   end

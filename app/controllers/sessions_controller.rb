@@ -27,27 +27,4 @@ class SessionsController < ApplicationController
   end
   
 end
-
-  # get '/sessions/logout' do
-  #   session.clear
-  #   redirect '/'
-  # end
-  
-  # get '/login_error' do
-  #   @error_message
-  # end
-
-  # get '/signup_error/' do
-  #   "There seems to be an error with your email or password."
-  # end
-
-# helpers do
-#     def logged_in?
-#       !!session[:id]
-#     end
-
-#     def current_user
-#       User.find(session[:user_id])
-#     end
-#   end
-
+ 

@@ -5,15 +5,14 @@
 
 <%# A table listing all the meetings %>
 <%# table head %>
-<table>
+<table class="table-dark">
     <thead>
       <tr>
           <th> </th>
-          <th>Client Name</th>
-          <th>User Name</th>
-<!--      FOR FUTURE DEV
-          <th>Event Date ID</th> 
--->
+          <th>Client </th>
+          <th>User </th>
+          <th>Date </th>
+          <th>Time </th>
           <th> </th>
           <th> </th>
       </tr>
@@ -28,15 +27,8 @@
       <td><%= i %>. </td>
       <td><%= meeting.client_name%></td>
       <td><%= meeting.user_name %></td>
-      <td><%= meeting.meeting_date %></td> <%# this is showing YYYY-MM-DD %>
-      <td><%= meeting.meeting_time %></td> <%# this is showing YYYY-MM-DD HH:MM:SS UTC %>
-<!--      <%# <td><%= meeting.find_by_id(:id).strftime("%B %d, %Y") %></td> %>
-
-      <td><%# binding.pry %></td>
-      
-<!--      FOR FUTURE DEV
-      <td><%= meeting.event_date_id %></td>
--->
+      <td><%= meeting.meeting_date.strftime("%A, %B %d, %Y") %></td> 
+      <td><%= meeting.meeting_time.strftime("%I:%M%P") %></td> 
     
       <%# UPDATE button %>
       <form method="get" action="/meetings/<%= meeting.id %>/edit">
@@ -45,7 +37,7 @@
 
       <%# DELETE button %>
       <form method="post" action="/meetings/<%= meeting.id %>/delete">
-        <td><button id="hidden" name="_method" value="DELETE" type="submit" class="btn btn-dark btn-sm">Delete Meeting</button></td>
+        <td><button id="hidden" name="_method" value="delete" type="submit" class="btn btn-dark btn-sm">Delete Meeting</button></td>
       </form>
 
     <% end %>

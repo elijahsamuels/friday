@@ -1,11 +1,11 @@
 <p>Meeting Id: <%= @meeting.id %></p>
 <p>User: <%= @meeting.user_name %></p>
 <p>Client: <%= @meeting.client_name %></p>
-<p>Date: <%= @meeting.meeting_date.strftime("%A, %B %d, %Y") %></p> <%# this is showing YYYY-MM-DD %>
-<p>Time: <%= @meeting.meeting_time %></p> <%# this is showing YYYY-MM-DD HH:MM:SS UTC %>
+<p>Date: <%= @meeting.meeting_date.strftime("%A, %B %d, %Y") %></p>
+<p>Time: <%= @meeting.meeting_time.strftime("%I:%M%P")%></p> <%# this is showing YYYY-MM-DD HH:MM:SS UTC %>
 
 <form method="post" action="/meetings/<%=@meeting.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input id="hidden" type="hidden" name="_method" value="delete">
   <%# <input type="submit" value="Delete Meeting"> %>
 <ul><button type="submit" value="Delete Meeting" class="btn btn-dark btn-sm">Delete Meeting</button>
 </form>

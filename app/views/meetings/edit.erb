@@ -3,7 +3,7 @@
 <h2>Let's update your meeting, <%= @user.first_name %>!</h2>
 
 <form method="post" action="/meetings/<%=@meeting.id%>">
-  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <input id="hidden" type="hidden" name="_method" value="patch">
 
   <ul>Meeting Id: <%= @meeting.id %></ul>
 
@@ -11,9 +11,9 @@
 
   <ul>Client: <input type="text" name="meeting[client_name]" value="<%= @meeting.client_name %>" required></ul>
 
-  <ul>Date: <input type="date" name="meeting[meeting_date]" value="<%= @meeting.meeting_date.strftime("%Y-%m-%d")%>" min="<%=datetime_current%>"></ul>
+  <ul>Date: <input type="date" name="meeting[meeting_date]" value="<%= @meeting.meeting_date.strftime("%Y-%m-%d")%>" min="<%=booking_date.strftime("%Y-%m-%d")%>"></ul>
 
-  <ul>Time: <input type="time" name="meeting[meeting_time]" value="<%= @meeting.meeting_time %>" ></ul>
+  <ul>Time: <input type="time" name="meeting[meeting_time]" value="<%= @meeting.meeting_time.strftime("%I:%M")%>" min="10:00" max="16:00"></ul>
 
   <ul><button type="submit" value="Update Meeting" class="btn btn-dark btn-sm">Update Meeting</button>
 
