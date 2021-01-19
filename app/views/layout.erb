@@ -10,23 +10,20 @@
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
 
-
     <title>Friday - Appt. booking assistant</title>
   </head>
 
   <body>
-
     <div class="wrapper">
-<%# START NAV %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <%# START NAV %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-    <%# <a href="/">Main</a>  %>
     <% if !logged_in? %>
     <form action='/' method='get'>
         <button type="submit" class="btn btn-light btn-sm">Main</button>
@@ -47,13 +44,18 @@
       </form>
       <br>
 
-      <form action='/users/<%= @user.id %>/edit' method='get'>
+      <form action='/users/<%= @current_user.id %>/edit' method='get'>
           <button type="submit" class="btn btn-light btn-sm">Edit Info</button>
       </form>
       <br>
 
       <form action='/logout' method='get'>
           <button type="submit" class="btn btn-light btn-sm">Log Out</button>
+      </form>
+      <br>
+
+      <form action='/meetings/all' method='get'>
+          <button type="submit" class="btn btn-light btn-sm">EVERY MEETING EVER</button>
       </form>
       <br>
 
@@ -77,8 +79,6 @@
           <p id="todaysDate"></p>
       </button>
 
-
-
     <% end %>
     </div>
   </div>
@@ -88,7 +88,6 @@
     <% flash.keys.each do |name, msg|%>
       <div class="alert alert-<%= name %>">
       <%= flash[name] %>
-<!--      <a href="#" class="close">&times;</a> -->
       </div>
     <% end %>
       

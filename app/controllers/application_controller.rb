@@ -41,13 +41,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def logged_in?
-      # !!session[:user_id]
-      # !!current_user
-      !!User.find_by(id: session[:user_id])
+      !!current_user # returns "true" if the current user is logged in
     end
+
       # a ||= b #assign b to a if a is null or undefined or false (i.e. false-ish value in ruby)
     def current_user
-      # User.find(session[:user_id])
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
       end
     end

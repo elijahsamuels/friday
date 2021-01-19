@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
   
-  # before do
-  #   require_login
-  # end
-
   # GET: /users
   get "/users" do
     if logged_in?
@@ -33,16 +29,16 @@ class UsersController < ApplicationController
   end
   
   # CREATE: /new # this makes the new user. This breaks convention, but it's the same idea as new/create
-  get "/signup" do
-    erb :'/signup'    
+  get "/users/signup" do
+    erb :'/users/signup'    
 	end
   
   # POST: /users
-  post "/signup" do    
+  post "/users/signup" do    
       # this is preventing users from signing up with the same email address.
     if User.find_by(email: params[:user][:email]) != nil
       signup_error
-      redirect "/signup"
+      redirect "/users/signup"
     end
     
     @user = User.new(
@@ -57,7 +53,7 @@ class UsersController < ApplicationController
       redirect "/users/#{@user.id}"
     else
       signup_error
-      redirect "/signup"
+      redirect "/users/signup"
     end
   end
   
@@ -76,23 +72,18 @@ class UsersController < ApplicationController
   # GET: /users/5
   get "/users/:id" do
     @user = User.find_by_id(params[:id])
-    if !logged_in?
-      not_user_object
-      erb :'/index'
-    else
-      if logged_in? && @user == self.current_user # this is preventing the user from changing the URL to another users
+      if @user.id == current_user.id # this is preventing the user from changing the URL to another users
         erb :"/users/show"
       else 
         not_user_object
         redirect "/users/#{current_user.id}" # this redirects the user back to their user edit page
       end
     end
-  end
 
   # GET: /users/5/edit
   get "/users/:id/edit" do
     @user = User.find_by_id(params[:id])
-    if logged_in? && @user == self.current_user
+    if @user.id == current_user.id
       erb :"/users/edit"
     else 
       not_user_object
@@ -102,9 +93,9 @@ class UsersController < ApplicationController
   
   # PATCH: /users/5
   patch "/users/:id" do
+    require_login
     @user = User.find_by_id(params[:id])
-    if logged_in? && @user == self.current_user
-
+    if @user.id == current_user.id
       @user.update(
         last_name: params[:user][:last_name],
         first_name: params[:user][:first_name],
