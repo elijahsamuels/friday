@@ -58,7 +58,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def login_error
-      flash[:danger] = "Login error. Please try again."
+      flash[:danger] = "You must be logged in for that."
     end
 
     def signup_error

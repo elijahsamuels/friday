@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
 
   get '/meetings' do
+    require_login
     @user = User.find_by_id(session[:user_id])
     if @user
         @meetings = @user.meetings
@@ -13,14 +14,10 @@ class MeetingsController < ApplicationController
 
   get '/meetings/new' do
     booking_date
-    if logged_in?
-      @meeting = Meeting.all
-      @user = User.find_by_id(session[:user_id])
-      erb :'/meetings/new'
-    else
-      not_user_object
-      redirect "/"
-    end
+    require_login
+    @meeting = Meeting.all
+    @user = User.find_by_id(session[:user_id])
+    erb :'/meetings/new'
   end
   
     # LIVE CODING REQUIREMENT

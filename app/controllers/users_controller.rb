@@ -2,13 +2,9 @@ class UsersController < ApplicationController
   
   # GET: /users
   get "/users" do
-    if logged_in?
+      require_login
       @user = User.find(session[:id])
       erb :"/users/index"
-    else
-      login_error
-      redirect "/"
-    end
   end
   
   # GET: /users/new
@@ -50,17 +46,6 @@ class UsersController < ApplicationController
       redirect "/users/signup"
     end
   end
-  
-  # get '/show' do
-  #   @user
-  #   # binding.pry
-  #   erb :"/show"
-  # end
-
-  # post '/show' do
-  #   @user
-  #   erb :"/show"
-  # end
 
   # READ
   # GET: /users/5
@@ -101,11 +86,6 @@ class UsersController < ApplicationController
       # not_user_object
       erb :'/error'
     end
-  end
-
-  # DELETE: /users/5/delete
-  delete "/users/:id/delete" do
-    redirect "/users"
   end
 
 end
