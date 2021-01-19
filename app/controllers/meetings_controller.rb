@@ -1,11 +1,8 @@
 class MeetingsController < ApplicationController
 
-  # READ
-  # Index
-  # GET: /meetings
   get '/meetings' do
     @user = User.find_by_id(session[:user_id])
-      if @user
+    if @user
         @meetings = @user.meetings
       erb :'/meetings/index'
     else
@@ -14,8 +11,6 @@ class MeetingsController < ApplicationController
     end
   end  
 
-  #CREATE
-  # GET: /meetings/new
   get '/meetings/new' do
     booking_date
     if logged_in?
@@ -39,8 +34,6 @@ class MeetingsController < ApplicationController
       end
     end
 
-  #CREATE
-  # POST: /meetings
   post '/meetings' do
     require_login
     @meeting = Meeting.new(params)
@@ -48,10 +41,10 @@ class MeetingsController < ApplicationController
     @user.meetings << @meeting
     if @meeting.save
       meeting_saved
+      redirect "/meetings/#{@meeting.id}"
     else
       erb :'/meetings/new' #let the user try again
     end
-    redirect "/meetings/#{@meeting.id}"
   end
   
   get '/show' do
@@ -63,7 +56,6 @@ class MeetingsController < ApplicationController
     erb :"/show"
   end
   
-  # GET: /meetings/5
   get '/meetings/:id' do
     @meeting = Meeting.find_by_id(params[:id])
     if @meeting.user_id == current_user.id
@@ -74,7 +66,6 @@ class MeetingsController < ApplicationController
     end
   end
 
-  # GET: /meetings/5/edit
   get "/meetings/:id/edit" do
     @meeting = Meeting.find_by_id(params[:id])
     if @meeting.user_id == current_user.id
@@ -85,7 +76,6 @@ class MeetingsController < ApplicationController
     end
   end
   
-  # PATCH: /meetings/5
   patch "/meetings/:id" do
     require_login
     @meeting = Meeting.find_by_id(params[:id])
@@ -101,20 +91,19 @@ class MeetingsController < ApplicationController
       else
         redirect '/meetings'
       end
-    end
+  end
     
     # add same protections from PATCH
-    # DELETE: /meetings/5/delete
-    delete "/meetings/:id/delete" do
-      require_login
-      @meeting = Meeting.find(params[:id])
-      if @meeting.user_id == current_user.id
-        @meeting.destroy
-        redirect "/meetings"
-      else
-        redirect "/meetings"
-      end
+  delete "/meetings/:id/delete" do
+    require_login
+    @meeting = Meeting.find(params[:id])
+    if @meeting.user_id == current_user.id
+      @meeting.destroy
+      redirect "/meetings"
+    else
+      redirect "/meetings"
     end
+  end
 
 end
 

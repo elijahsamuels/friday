@@ -1,7 +1,7 @@
 <table class="table-dark">
     <thead>
       <tr>
-          <th> </th>
+          <th> </th> <%# leave this blank %>
           <th>Scheduled by </th>
           <th>Client </th>
           <th>User </th>
@@ -13,12 +13,10 @@
 <%# table body iterating through all the meetings %>
 <%# might be nice to make each of these a link to the individual meeting %>
 
-
 <tbody>
   <% @meetings.each.with_index(1) do |meeting, i| %>
     <tr>
       <td><%= i %>. </td>
-      <!-- list user who created the meeting -->
       <td><%= User.find_by_id(meeting.user_id).first_name %> <%= User.find_by_id(meeting.user_id).last_name %> </td> 
       <td><%= meeting.client_name%></td>
       <td><%= meeting.user_name %></td>
@@ -29,4 +27,4 @@
 <tbody>
 
 <%# 
-      <td><%= User.find_by_id(meeting.user_id).(:first_name, :last_name) %>  
+      <td><%= User.find_by_id(meeting.user_id).pluck(:first_name, :last_name) %>  
