@@ -35,12 +35,6 @@ class UsersController < ApplicationController
   
   # POST: /users
   post "/users/signup" do    
-      # this is preventing users from signing up with the same email address.
-    if User.find_by(email: params[:user][:email]) != nil
-      signup_error
-      redirect "/users/signup"
-    end
-    
     @user = User.new(
       :first_name => params[:user][:first_name],
       :last_name => params[:user][:last_name],

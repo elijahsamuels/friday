@@ -27,13 +27,20 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
   
+  
   error do
     # not_user_object
     erb :error
   end
   
   helpers do
-  
+    
+    def missing_meeting
+      if Meeting.find_by_id(params[:id]) == nil
+        redirect '/'
+      end
+    end
+
     def require_login
       unless logged_in?
         redirect '/login'

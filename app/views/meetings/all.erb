@@ -17,7 +17,7 @@
   <% @meetings.each.with_index(1) do |meeting, i| %>
     <tr>
       <td><%= i %>. </td>
-      <td><%= User.find_by_id(meeting.user_id).first_name %> <%= User.find_by_id(meeting.user_id).last_name %> </td> 
+      <td><%= User.find_by_id(meeting.user_id).first_name %> <%= User.find_by_id(meeting.user_id).last_name %> </td>
       <td><%= meeting.client_name%></td>
       <td><%= meeting.user_name %></td>
       <td><%= meeting.meeting_date.strftime("%A, %B %d, %Y") %></td>
@@ -27,4 +27,5 @@
 <tbody>
 
 <%# 
-      <td><%= User.find_by_id(meeting.user_id).pluck(:first_name, :last_name) %>  
+      <%# <td><%= User.find_by_id(meeting.user_id).pluck(:first_name, :last_name) %>  
+      <%# <td><%= User.find_by_id(meeting.user_id).where(*)%>   

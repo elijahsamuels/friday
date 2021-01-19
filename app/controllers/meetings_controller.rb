@@ -58,6 +58,7 @@ class MeetingsController < ApplicationController
   
   get '/meetings/:id' do
     @meeting = Meeting.find_by_id(params[:id])
+    missing_meeting
     if @meeting.user_id == current_user.id
       erb :'/meetings/show'
     else
@@ -68,6 +69,7 @@ class MeetingsController < ApplicationController
 
   get "/meetings/:id/edit" do
     @meeting = Meeting.find_by_id(params[:id])
+    missing_meeting
     if @meeting.user_id == current_user.id
       erb :'/meetings/edit'
     else
@@ -101,6 +103,7 @@ class MeetingsController < ApplicationController
       @meeting.destroy
       redirect "/meetings"
     else
+      not_user_object
       redirect "/meetings"
     end
   end
