@@ -14,14 +14,14 @@
 <%# might be nice to make each of these a link to the individual meeting %>
 
 <tbody>
-  <% @meetings.each.with_index(1) do |meeting, i| %>
+  <% @meeting.each.with_index(1) do |m, i| %>
     <tr>
       <td><%= i %>. </td>
-      <td><%= meeting.user.namejoin %></td>
-      <td><%= meeting.client_name%></td>
-      <td><%= meeting.user_name %></td>
-      <td><%= meeting.meeting_date.strftime("%A, %B %d, %Y") %></td>
-      <td><%= meeting.meeting_time.strftime("%I:%M%P") %></td> 
+      <td><%= m.user.namejoin %></td>
+      <td><%= m.client_name%></td>
+      <td><%= m.user_name %></td>
+      <td><%= m.meeting_date.strftime("%A, %B %d, %Y") %></td>
+      <td><%= m.meeting_time.strftime("%I:%M%P") %></td> 
     <% end %>
 
 <tbody>

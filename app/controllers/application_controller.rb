@@ -34,6 +34,15 @@ class ApplicationController < Sinatra::Base
   end
   
   helpers do
+
+    
+    def all_meetings
+      @meeting = Meeting.all
+    end
+    
+    def meeting_find_by_id
+      @meeting = Meeting.find_by_id(params[:id])
+    end
     
     def missing_meeting
       if Meeting.find_by_id(params[:id]) == nil
@@ -43,6 +52,7 @@ class ApplicationController < Sinatra::Base
 
     def require_login
       unless logged_in?
+        not_user_object
         redirect '/login'
       end
     end
